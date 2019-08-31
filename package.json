@@ -1,0 +1,7 @@
+{
+    "name": "mac-theme",
+    "version": "0.1.7",
+    "dependencies": {
+        "esm": "^3.2.25"
+    }
+}
