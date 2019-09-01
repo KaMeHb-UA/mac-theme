@@ -52,7 +52,7 @@ const darkDockOnly = 'NSRequiresAquaSystemAppearance',
             maximizeBtn: [ '34d13e', '36cd40' ],
             borders: [ 'afafaf', 'cfcfcf', 'd5d5d5', 'aaa' ],
         },
-    },
+    };
 
 function getOpt(spawn, option){
     return spawn('defaults', [ 'read', '-g', option ], { encoding: 'utf-8' })
@@ -98,7 +98,7 @@ function getAccentSync(){
     }
 }
 
-function getAccentAsync(){
+async function getAccentAsync(){
     try{
         return accentMap[(await getOptAsync(accent)) || 4]
     } catch(e){
