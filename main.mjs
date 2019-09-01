@@ -59,9 +59,7 @@ function getOpt(spawn, option){
 }
 
 function getOptSync(option){
-    const opt = getOpt(spawnSync, option).stdout.split('\n')[0];
-    console.log({ option, opt });
-    return opt
+    return getOpt(spawnSync, option).stdout.split('\n')[0]
 }
 
 function getOptAsync(option){
