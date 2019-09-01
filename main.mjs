@@ -106,12 +106,44 @@ function getAccentAsync(){
     }
 }
 
+function wait(ms){
+    return new Promise(r => setTimeout(r, ms))
+}
+
+function diff(obj0, obj1){
+    const diff = { length: 0, 0: {}, 1: {} };
+    let i;
+    for(i in obj0){
+        if(obj0[i][0] !== obj1[i][0] || obj0[i][1] !== obj1[i][1]){
+            diff.length++;
+            diff[0][i] = obj0[i];
+            diff[1][i] = obj1[i];
+        }
+    }
+    return diff
+}
+
 export function sync(){
     const accent = getAccentSync();
     return Object.assign({ accent }, themeColorsMap[getThemeSync()], accent[themeColors] || {})
 }
 
-export default async function(){
+export default async function async(){
     const [ accent, theme ] = await Promise.all([getAccentAsync(), getThemeAsync()]);
     return Object.assign({ accent }, themeColorsMap[theme], accent[themeColors] || {})
+}
+
+export function registerListener(listener, timeout = 1000){
+    let a = true,
+        last = {};
+    (async () => {
+        while(a){
+            const curr = await async();
+            const _ = diff(last, curr);
+            if(_.length) await listener(_[1]);
+            last = curr;
+            await wait(timeout)
+        }
+    })();
+    return () => { a = false }
 }
