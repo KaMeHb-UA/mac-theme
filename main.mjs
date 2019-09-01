@@ -31,26 +31,26 @@ const darkDockOnly = 'NSRequiresAquaSystemAppearance',
     },
     themeColorsMap = {
         0: {
-            heading: [ 'd0d0d0', 'e5e5e5' ],
-            headingButtons: [ 'f1f1f1', 'fff'],
-            selectButtons: [ 'fff', 'fff' ],
-            radioCheckButtons: [ 'fff', 'fff' ],
-            appBg: [ 'ececec', 'ececec' ],
-            closeBtn: [ 'fc4f51', 'fc4b4e' ],
-            minimizeBtn: [ 'fec532', 'febe30' ],
-            maximizeBtn: [ '38d544', '36cd40' ],
-            borders: [ 'fff0', 'ffffff0f', '464646', '000' ],
-        },
-        1: {
             heading: [ '353535', '414141' ],
             headingButtons: [ '656565', '6c6c6c'],
             selectButtons: [ '656565', '656565' ],
             radioCheckButtons: [ '6c6c6c', '515151' ],
             appBg: [ '2e2e2e', '323232' ],
+            closeBtn: [ 'fc4f51', 'fc4b4e' ],
+            minimizeBtn: [ 'fec532', 'febe30' ],
+            maximizeBtn: [ '38d544', '36cd40' ],
+            borders: [ 'afafaf', 'cfcfcf', 'd5d5d5', 'aaa' ],
+        },
+        1: {
+            heading: [ 'd0d0d0', 'e5e5e5' ],
+            headingButtons: [ 'f1f1f1', 'fff'],
+            selectButtons: [ 'fff', 'fff' ],
+            radioCheckButtons: [ 'fff', 'fff' ],
+            appBg: [ 'ececec', 'ececec' ],
             closeBtn: [ 'fd5857', 'fd5858' ],
             minimizeBtn: [ 'fec12e', 'febe30' ],
             maximizeBtn: [ '34d13e', '36cd40' ],
-            borders: [ 'afafaf', 'cfcfcf', 'd5d5d5', 'aaa' ],
+            borders: [ 'fff0', 'ffffff0f', '464646', '000' ],
         },
     };
 
@@ -59,7 +59,9 @@ function getOpt(spawn, option){
 }
 
 function getOptSync(option){
-    return getOpt(spawnSync, option).stdout.split('\n')[0]
+    const opt = getOpt(spawnSync, option).stdout.split('\n')[0];
+    console.log({ option, opt });
+    return opt
 }
 
 function getOptAsync(option){
