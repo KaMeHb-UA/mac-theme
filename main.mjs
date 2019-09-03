@@ -139,8 +139,7 @@ export function registerListener(listener, timeout = 1000){
     (async () => {
         while(a){
             const curr = await async();
-            const _ = diff(last, curr);
-            if(_.length) await listener(_[1]);
+            if(diff(last, curr).length) await listener(curr);
             last = curr;
             await wait(timeout)
         }
