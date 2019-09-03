@@ -36,6 +36,8 @@ export const
         0: {
             heading: [ '353535', '414141' ],
             headingButtons: [ '656565', '6c6c6c'],
+            headingColor: 'b7b8b9',
+            inactiveHeadingColor: '7e7f80',
             selectButtons: [ '656565', '656565' ],
             radioCheckButtons: [ '6c6c6c', '515151' ],
             appBg: [ '2e2e2e', '323232' ],
@@ -47,6 +49,10 @@ export const
         1: {
             heading: [ 'd0d0d0', 'e5e5e5' ],
             headingButtons: [ 'f1f1f1', 'fff'],
+            // need to change
+            headingColor: 'b7b8b9',
+            inactiveHeadingColor: '7e7f80',
+            //
             selectButtons: [ 'fff', 'fff' ],
             radioCheckButtons: [ 'fff', 'fff' ],
             appBg: [ 'ececec', 'ececec' ],
