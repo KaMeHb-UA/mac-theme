@@ -60,7 +60,7 @@ function wait(ms){
 function diff(obj0, obj1){
     let i;
     for(i in obj0){
-        if(obj0[i][0] !== obj1[i][0] || obj0[i][1] !== obj1[i][1]){
+        if(!(i in obj1) || obj0[i][0] !== obj1[i][0] || obj0[i][1] !== obj1[i][1]){
             return true
         }
     }
