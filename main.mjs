@@ -1,7 +1,8 @@
 import { spawn, spawnSync } from 'child_process'
 import { darkDockOnly, theme, accent, themeColors, accentMap, themeColorsMap } from './constants.mjs'
 
-const EMPTYOBJ = Object.create(null);
+const EMPTYOBJ = Object.create(null),
+    length = Symbol();
 
 function getOpt(spawn, option){
     return spawn('defaults', [ 'read', '-g', option ], { encoding: 'utf-8' })
@@ -61,12 +62,15 @@ function wait(ms){
 
 function diff(obj0, obj1){
     let i;
-    for(i in obj0){
-        if(!(i in obj1) || obj0[i][0] !== obj1[i][0] || obj0[i][1] !== obj1[i][1]){
-            return true
+    const res = Object.create(null);
+    res[length] = 0;
+    for(i in obj1){
+        if(!obj0[i] || obj0[i][0] !== obj1[i][0] || obj0[i][1] !== obj1[i][1]){
+            res[length]++;
+            res[i] = obj1[i];
         }
     }
-    return false
+    return res
 }
 
 function buildTheme(theme, accent){
@@ -84,11 +88,15 @@ export default async function async(){
 
 export function registerListener(listener, timeout = 1000){
     let a = true,
-        last = {0:0};
+        last = EMPTYOBJ;
     (async () => {
         while(a){
             const curr = await async();
-            if(diff(last, curr)) await listener(curr);
+            const d = diff(last, curr);
+            if(d[length]){
+                delete d[length];
+                await listener(d);
+            }
             last = curr;
             await wait(timeout)
         }
