@@ -7,9 +7,7 @@ export const
     themeColors = Symbol(),
 
     accentMap = {
-        [-1]: {
-            0: '999999',
-            1: '999999',
+        [-1]: Object.assign(['999999', '999999'], {
             [themeColors]: {
                 0: {
                     closeBtn: [ '8e8e93', '8d8d92' ],
@@ -22,7 +20,7 @@ export const
                     maximizeBtn: [ '9f9fa4', '9a9a9f' ],
                 }
             }
-        },
+        }),
         0: [ 'dc382f', 'f64035' ],
         1: [ 'fd8000', 'ff9000' ],
         2: [ 'e0aa00', 'fabe00' ],
