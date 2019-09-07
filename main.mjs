@@ -79,7 +79,7 @@ export default async function async(){
 
 export function registerListener(listener, timeout = 1000){
     let a = true,
-        last = {};
+        last = {0:0};
     (async () => {
         while(a){
             const curr = await async();
