@@ -1,6 +1,8 @@
 import { spawn, spawnSync } from 'child_process'
 import { darkDockOnly, theme, accent, themeColors, accentMap, themeColorsMap } from './constants.mjs'
 
+const EMPTYOBJ = Object.create(null);
+
 function getOpt(spawn, option){
     return spawn('defaults', [ 'read', '-g', option ], { encoding: 'utf-8' })
 }
@@ -67,14 +69,17 @@ function diff(obj0, obj1){
     return false
 }
 
+function buildTheme(theme, accent){
+    return Object.assign({ accent }, themeColorsMap[theme], (accent[themeColors] || EMPTYOBJ)[theme] || EMPTYOBJ)
+}
+
 export function sync(){
-    const accent = getAccentSync();
-    return Object.assign({ accent }, themeColorsMap[getThemeSync()], accent[themeColors] || {})
+    return buildTheme(getThemeSync(), getAccentSync())
 }
 
 export default async function async(){
     const [ accent, theme ] = await Promise.all([getAccentAsync(), getThemeAsync()]);
-    return Object.assign({ accent }, themeColorsMap[theme], accent[themeColors] || {})
+    return buildTheme(theme, accent)
 }
 
 export function registerListener(listener, timeout = 1000){
