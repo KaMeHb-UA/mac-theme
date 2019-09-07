@@ -61,4 +61,4 @@ export const
             maximizeBtn: [ '34d13e', '36cd40' ],
             borders: [ 'fff0', 'ffffff0f', '464646', '000' ],
         },
-    },
+    };
