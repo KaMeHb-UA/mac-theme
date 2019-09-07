@@ -1,4 +1,4 @@
-const { sync, async, registerListener } = require('.');
+const { sync, default: async, registerListener } = require('.');
 
 async function test(f){
     const start = new Date;
@@ -30,4 +30,4 @@ executed with args:`, ...args, `
     await test(sync);
     await test(async);
     testCallback(registerListener);
-})()
+})().catch(e => console.error(e))
