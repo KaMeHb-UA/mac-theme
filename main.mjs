@@ -58,16 +58,13 @@ function wait(ms){
 }
 
 function diff(obj0, obj1){
-    const diff = { length: 0, 0: {}, 1: {} };
     let i;
     for(i in obj0){
         if(obj0[i][0] !== obj1[i][0] || obj0[i][1] !== obj1[i][1]){
-            diff.length++;
-            diff[0][i] = obj0[i];
-            diff[1][i] = obj1[i];
+            return true
         }
     }
-    return diff
+    return false
 }
 
 export function sync(){
@@ -86,7 +83,7 @@ export function registerListener(listener, timeout = 1000){
     (async () => {
         while(a){
             const curr = await async();
-            if(diff(last, curr).length) await listener(curr);
+            if(diff(last, curr)) await listener(curr);
             last = curr;
             await wait(timeout)
         }
