@@ -1,3 +1,21 @@
+function color(color){
+    return '#' + color
+}
+
+function gradient(start, stop, type){
+    return Object.assign([ color(start), color(stop) ], {
+        _gradientType: type
+    })
+}
+
+function linearGradient(start, stop){
+    return gradient(start, stop, 'linear')
+}
+
+function circleGradient(start, stop){
+    return gradient(start, stop, 'circle')
+}
+
 export const
 
     darkDockOnly = 'NSRequiresAquaSystemAppearance',
@@ -7,56 +25,58 @@ export const
     themeColors = Symbol(),
 
     accentMap = {
-        [-1]: Object.assign(['999999', '999999'], {
+        [-1]: Object.assign(color('999999'), {
             [themeColors]: {
                 0: {
-                    closeBtn: [ '8e8e93', '8d8d92' ],
-                    minimizeBtn: [ '8e8e93', '8d8d92' ],
-                    maximizeBtn: [ '8e8e93', '8d8d92' ],
+                    closeBtn: circleGradient('8e8e93', '8d8d92'),
+                    minimizeBtn: circleGradient('8e8e93', '8d8d92'),
+                    maximizeBtn: circleGradient('8e8e93', '8d8d92'),
                 },
                 1: {
-                    closeBtn: [ '9f9fa4', '9a9a9f' ],
-                    minimizeBtn: [ '9f9fa4', '9a9a9f' ],
-                    maximizeBtn: [ '9f9fa4', '9a9a9f' ],
+                    closeBtn: circleGradient('9f9fa4', '9a9a9f'),
+                    minimizeBtn: circleGradient('9f9fa4', '9a9a9f'),
+                    maximizeBtn: circleGradient('9f9fa4', '9a9a9f'),
                 }
             }
         }),
-        0: [ 'dc382f', 'f64035' ],
-        1: [ 'fd8000', 'ff9000' ],
-        2: [ 'e0aa00', 'fabe00' ],
-        3: [ '35ad21', '3cc025' ],
-        4: [ '145fce', '1769e7' ],
-        5: [ '933992', 'a441a3' ],
-        6: [ 'c63572', 'de3c7f' ],
+        0: linearGradient('dc382f', 'f64035'),
+        1: linearGradient('fd8000', 'ff9000'),
+        2: linearGradient('e0aa00', 'fabe00'),
+        3: linearGradient('35ad21', '3cc025'),
+        4: linearGradient('145fce', '1769e7'),
+        5: linearGradient('933992', 'a441a3'),
+        6: linearGradient('c63572', 'de3c7f'),
     },
 
     themeColorsMap = {
         0: {
-            heading: [ '353535', '414141' ],
-            headingButtons: [ '656565', '6c6c6c'],
-            headingColor: 'b7b8b9',
-            inactiveHeadingColor: '7e7f80',
-            selectButtons: [ '656565', '656565' ],
-            radioCheckButtons: [ '6c6c6c', '515151' ],
-            appBg: [ '2e2e2e', '323232' ],
-            closeBtn: [ 'fc4f51', 'fc4b4e' ],
-            minimizeBtn: [ 'fec532', 'febe30' ],
-            maximizeBtn: [ '38d544', '36cd40' ],
-            borders: [ 'afafaf', 'cfcfcf', 'd5d5d5', 'aaa' ],
+            heading: linearGradient('353535', '414141'),
+            headingButtons: linearGradient('656565', '6c6c6c'),
+            headingColor: color('b7b8b9'),
+            inactiveHeadingColor: color('7e7f80'),
+            selectButtons: color('656565'),
+            radioCheckButtons: linearGradient('6c6c6c', '515151'),
+            appBg: linearGradient('2e2e2e', '323232'),
+            closeBtn: linearGradient('fc4f51', 'fc4b4e'),
+            minimizeBtn: linearGradient('fec532', 'febe30'),
+            maximizeBtn: linearGradient('38d544', '36cd40'),
+            outerBorders: linearGradient('afafaf', 'cfcfcf'),
+            innerBorders: linearGradient('d5d5d5', 'aaa'),
         },
         1: {
-            heading: [ 'd0d0d0', 'e5e5e5' ],
-            headingButtons: [ 'f1f1f1', 'fff'],
+            heading: linearGradient('d0d0d0', 'e5e5e5'),
+            headingButtons: linearGradient('f1f1f1', 'fff'),
             // need to change
-            headingColor: 'b7b8b9',
-            inactiveHeadingColor: '7e7f80',
+            headingColor: color('b7b8b9'),
+            inactiveHeadingColor: color('7e7f80'),
             //
-            selectButtons: [ 'fff', 'fff' ],
-            radioCheckButtons: [ 'fff', 'fff' ],
-            appBg: [ 'ececec', 'ececec' ],
-            closeBtn: [ 'fd5857', 'fd5858' ],
-            minimizeBtn: [ 'fec12e', 'febe30' ],
-            maximizeBtn: [ '34d13e', '36cd40' ],
-            borders: [ 'fff0', 'ffffff0f', '464646', '000' ],
+            selectButtons: linearGradient('fff', 'fff'),
+            radioCheckButtons: linearGradient('fff', 'fff'),
+            appBg: linearGradient('ececec', 'ececec'),
+            closeBtn: linearGradient('fd5857', 'fd5858'),
+            minimizeBtn: linearGradient('fec12e', 'febe30'),
+            maximizeBtn: linearGradient('34d13e', '36cd40'),
+            outerBorders: linearGradient('fff0', 'ffffff0f'),
+            innerBorders: linearGradient('464646', '000'),
         },
     };
