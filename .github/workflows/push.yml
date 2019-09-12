@@ -1,0 +1,29 @@
+on: push
+name: Send Notification
+jobs:
+  sendPhotoMessage:
+    name: Send Photo Message
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Send Photo Message
+      uses: appleboy/telegram-action@2df95b0
+      env:
+        DOCUMENT: tests/gophercolor.png
+        PHOTO: tests/github.png
+        TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      with:
+        args: send photo message.
+    - name: Send Default Message
+      uses: appleboy/telegram-action@2df95b0
+      env:
+        TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+    - name: Send Custom Message
+      uses: appleboy/telegram-action@2df95b0
+      env:
+        TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      with:
+        args: 'A new commit has been pushed. commit: {{ commit.sha }}'
